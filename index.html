@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html>
+<style>
+    .video-title-container {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      margin: 0 10%;
+    }
+    .video-title {
+      width: 100%;
+      text-align: center;
+      font-style: italic;
+      font-size: 1em; 
+    }
+    .video-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+      gap: 15px; /* Space between videos */
+      max-width: 1500px; /* Adjust to your preferred width */
+      margin: 0 auto; /* Center align the grid */
+    }
+    .video-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .video-title {
+        margin-bottom: 10px; 
+        font-weight: bold;
+        text-align: center;
+    }
+    video {
+        width: 100%; 
+        height: auto;
+    }
+    .video-container-four {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 columns */
+      gap: 15px; /* Space between videos */
+      max-width: 1500px; /* Adjust to your preferred width */
+      margin: 0 auto; /* Center align the grid */
+    }
+    .video-item-four {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .video-title-four {
+        margin-bottom: 10px; /* Space between title and video */
+        font-weight: bold;
+        text-align: center;
+    }
+    .new-row-container {
+        display: flex; /* Keep text and videos in one row */
+        flex-direction: row; /* Align text next to the videos */
+        align-items: center; /* Vertically align the text and videos */
+        justify-content: center; /* Center the whole row on the page */
+        gap: 20px; /* Space between the text and videos */
+        padding: 10px;
+        margin-left: 4%;
+    }
+    .new-text-prompt {
+        font-size: 18px;
+        font-weight: bold;
+        max-width: 200px; /* Constrain the width of the text */
+        text-align: left; /* Keep the text left-aligned */
+    }
+
+    .new-videos {
+        display: flex;
+        flex-direction: row; /* Arrange videos horizontally */
+        gap: 15px; /* Space between video items */
+    }
+
+    .new-video-item {
+        display: flex;
+        flex-direction: column; /* Stack title above the video */
+        align-items: center; /* Center-align titles and videos */
+    }
+
+    .new-video-title {
+        font-size: 16px;
+        margin-bottom: 5px; /* Space between title and video */
+    }
+
+    .new-videos video {
+        width: 200px; /* Set video size */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: cover; /* Crop and center the video */
+        font-size: small;
+    }
+</style>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="Project webpage for videojam">
+  <meta property="og:title" content="VideoJAM"/>
+  <meta property="og:description" content="Project webpage for videojam"/>
+  <meta property="og:url" content="https://videojam.github.io/"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Diffusion Models, video-to-video, generative AI">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Understanding in Video Models</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  <link rel="stylesheet" href="./supp/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrollable Table with Arrow Buttons</title>
+  <style>
+    .page-container {
+      width: 1200px;
+      min-height: 1000px;
+      margin: 0 auto;
+      text-align: left;
+      padding-top: 5em;
+      padding-left: 1em;
+      padding-right: 1em;
+      padding-bottom: 1em;
+      height: auto;
+    }
+
+    .scrollable-table-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #scrollableTableWrapper {
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+      display: table;
+      border-collapse: separate;
+      box-sizing: border-box;
+      text-indent: initial;
+      line-height: normal;
+      font-weight: normal;
+      font-size: medium;
+      font-style: normal;
+      color: -internal-quirk-inherit;
+      text-align: start;
+      border-spacing: 2px;
+      border-color: gray;
+      white-space: normal;
+      font-variant: normal;
+    }
+
+    .last-updated {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 10px;
+      color: black;
+      /* text color */
+      font-size: 1.0em;
+      z-index: 1000;
+      /* ensures it's on top of other elements */
+    }
+
+    .container-1 {
+      height:750px;
+    }
+
+    .container-2{
+      height:550px;
+
+    }
+
+    .video-container-character {
+      position: relative;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100%;
+      padding: 0;
+    }
+
+    .video-container-stylizaton {
+      position: relative;
+      overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+      height: 100%;
+      padding: 0;
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      content: '';
+    }
+
+    .video-container-character .swiper-button-next,
+    .video-container-character .swiper-button-prev {
+      top: 23rem;
+      outline: none;
+    }
+
+    .video-container-stylizaton .swiper-button-next,
+    .video-container-stylizaton .swiper-button-prev {
+      top: 15rem;
+      outline: none;
+    }
+
+    .swiper-icon {
+      font-size: 4rem;
+      color: black;
+    }
+    .video-size {
+    height: 335px;
+    }
+    .video-size-2 {
+    height: 250px;
+    }
+  </style>
+</head>
+
+
+
+<body>
+
+ <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Understanding in Video Models</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                Bla1
+              </span>
+              <span class="author-block">
+                Bla2
+              </span>
+              <span class="author-block">
+                Bla3
+              </span>
+              
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">Bla AI</span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- Paper PDF link -->
+                  <span class="link-block">
+                    <a href="paper.pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <svg class="svg-inline--fa fa-file-pdf fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg><!-- <i class="fas fa-file-pdf"></i> Font Awesome fontawesome.com -->
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <!-- Arxiv link -->
+                <span class="link-block">
+                <a href="https://arxiv.org/abs/2403.09334"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Benchmark Link. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/facebook/tgve_plus"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Benchmark</span>
+                  </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+Despite tremendous recent progress, generative video models continue to struggle with fundamental aspects of real-world dynamics, motion and physics.
+                We show that this limitation can be largely attributed to the conventional pixel reconstruction objective, which biases the model toward appearance fidelity at the expense of temporal coherence.
+To address this, we introduce <em>VideoJAM</em>, a novel framework to instill an effective motion prior to video generators, by encouraging the model to learn <em>joint appearance-motion representations</em>. VideoJAM is constructed of two complementary units. During training, we extend the objective to predict both the generated pixels and their corresponding motion, derived from a single learned representation.
+During inference, we introduce <em>Inner-Guidance</em>, a mechanism that steers the model toward temporally coherent generations by leveraging its own evolving motion predictions for guidance.
+Notably, our framework can be applied to any video model with minimal adaptations, and requires no additional data nor scaling of the model.
+VideoJAM sets state-of-the-art results in motion modeling, surpassing highly competitive proprietary models while also enhancing the perceived quality of the generations, suggesting that the two axes, appearance and motion, can and should be complementary
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+ <table  width="1200" align="center" >
+  <tbody>
+
+       <div class="video-container">
+                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A ballet dancer twirls on the surface of a still lake, the golden sunset casting warm hues..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A ballet dancer twirls on the surface of a still lake. The golden sunset casting warm hues.</div>
+            </div>
+            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A girl leans forward with a big smile, puffing her cheeks as she blows out the candles on her cupcake.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A girl leans forward with a big smile, puffing her cheeks as she blows out the candles on her cupcake.</div>
+            </div>
+            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dolphin and a seal playing volleyball with a beach ball, using their noses to pass it back and forth.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dolphin and a seal playing volleyball with a beach ball, using their noses to pass it back and forth.</div>
+            </div>
+            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A panda breakdancing in a neon-lit urban alley, graffiti art providing a colorful backdrop.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A panda breakdancing in a neon-lit urban alley, with graffiti art providing a colorful backdrop.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/An acrobat executing a one-arm handstand on a narrow beam above water.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">An acrobat executing a one-arm handstand on a narrow beam above water.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Fingers press into a shimmering slime ball, making it ooze glittery, translucent gel.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Fingers press into a shimmering slime ball.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dancer leaps across a stage at sunset, golden confetti fluttering around them.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dancer leaps across a stage at sunset, with golden confetti fluttering around them.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dog jumping over a wooden hurdle. Slow motion..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dog jumping over a wooden hurdle. Slow motion.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A figure skater executes a powerful leap, her golden costume sparkling as she soars through the air before landing gracefully on the ice..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A figure skater executes a powerful leap, their golden costume sparkling as they soar through the air before landing gracefully on the ice.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/a squirrel wearing bright yellow goggles glides down a water slide and splashes into the pool3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A squirrel glides down a water slide and splashes into the pool.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/An acrobat holding a handstand on a mat..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">An acrobat holding a handstand on a mat.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/In slow motion, a chef rapidly slices vegetables under bright kitchen lights.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A chef rapidly slices vegetables under bright kitchen lights. Slow motion.</div>
+            </div>
+
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/On the deck of a drifting ship, two robots are performing push-ups.5.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">On the deck of a drifting ship, two robots are performing push-ups.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A man holding a headstand on a yoga mat in a quiet studio..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A man holding a headstand on a yoga mat in a quiet studio.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A man takes a big bite from an apple.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A man takes a big bite from an apple.</div>
+            </div>
+
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A woman engaging in a challenging workout routine, performing pull-ups on green bars.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A woman engaging in a challenging workout routine, performing pull-ups on green bars.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Side view of a woman twirls a hula hoop around her waist in a park during sunset..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Side view of a woman twirls a hula-hoop around her waist in a park during sunset.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Under the spotlight of an empty stage, a ballet dancer leaps gracefully, their silhouette casting long shadows..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Under the spotlight of an empty stage, a ballet dancer leaps gracefully, their silhouette casting long shadows.</div>
+            </div>
+
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A martial artist performs cartwheels and kicks with precision under a spotlight.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A martial artist performs cartwheels and kicks with precision under a spotlight.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A monkey performs a 360 spin on a skateboard at the skate park, landing smoothly..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A monkey performs a 360 spin on a skateboard at the skate park, landing smoothly.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A penguin slides down a snowy hill on its belly, cheering with tiny flippers in the air..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A penguin slides down a snowy hill on its belly, cheering with tiny flippers in the air.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A skier performing a cork 720, twisting mid-air above a snowy mountain range..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A skier performing a cork 720, twisting midair above a snowy mountain range.</div>
+            </div>
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A raccoon riding a massive wave with style, its sleek body gliding effortlessly along the water..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A raccoon riding a massive wave with style, its body gliding effortlessly along the water.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A slow-motion close-up of a chef slicing a tomato into even slices on a wooden cutting board..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A slow-motion close-up of a chef slicing a tomato into even slices on a wooden cutting board.</div>
+            </div>
+
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A turtle gliding on a skateboard along a boardwalk, the ocean waves crashing in the background..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A turtle gliding on a skateboard along a boardwalk, the ocean waves crashing in the background.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A woman doing a handstand on a man's hands with mountains in the background..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A woman doing a handstand on a man's hands with mountains in the background.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A woman doing a pirouette in an empty dance studio. The video captures the grace and beauty of the young woman as she practices ballet, showcasing her flexibility and control4.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A woman doing a pirouette in an empty dance studio. The video captures the grace and beauty of the young woman as she practices ballet, showcasing her flexibility and control.</div>
+            </div>
+
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/An acrobat doing a headstand split in slow motion on a polished wooden floor..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">An acrobat doing a headstand split in slow motion on a polished wooden floor.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/At the edge of a roaring waterfall, a boxer practices jabs and hooks on a punching bag, sweat dripping as he refines his technique.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">At the edge of a roaring waterfall, a boxer practices jabs and hooks on a punching bag, sweat dripping as he refines his technique.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A basketball spins as it arcs through the air in an empty gym, bouncing off the backboard and falling into the hoop..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A basketball spins as it arcs through the air in an empty gym, bouncing off the backboard and falling into the hoop.</div>
+            </div>
+
+                                                            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dancer twirls gracefully on a confetti-strewn stage as the sun sets behind them..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dancer twirls gracefully on a confetti-strewn stage as the sun sets behind them.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/An otter riding rollerblades on two legs in a bustling city park, twirling past picnicking families.8.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">An otter riding rollerblades on two legs in a bustling city park, twirling past picnicking families.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A goat balancing on a spinning ball on a mountaintop, its steady gaze unflinching..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A goat balancing on a spinning ball on a mountaintop, its steady gaze unflinching.</div>
+            </div>
+
+            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A skateboarder performs jumps..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A skateboarder performs jumps.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A waterwheel turns as water flows over it, the paddles rotating consistently..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A waterwheel turns as water flows over it, the paddles rotating consistently.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A weightlifter performs a clean and jerk with perfect form in a concrete garage gym.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A weightlifter performs a clean and jerk with perfect form in a concrete garage gym.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/An arc shot captures a figure skater gliding gracefully across the ice in slow motion.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">An arc shot captures a figure skater gliding gracefully across the ice in slow motion.</div>
+            </div>
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A goat balancing on a large circus ball, carefully rolling it forward with its hooves.7.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A goat balancing on a large circus ball, carefully rolling it forward with its hooves.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/On a rainy rooftop, a pair of hip-hop dancers lock and pop in perfect sync, bringing energy and rhythm to the stage..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">On a rainy rooftop, a pair of hip-hop dancers lock and pop in perfect sync, bringing energy and rhythm to the stage.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/person is running on a treadmil.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A person is running on a treadmill.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Slow motion capture of an eagle_s wings during landing approach.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Slow motion capture of an eagle_s wings during landing approach.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A bear pedaling a unicycle through a circus tent, receiving cheers from the audience.11.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A bear pedaling a unicycle through a circus tent, receiving cheers from the audience.</div>
+            </div>
+
+            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A kangaroo hopping across a dry outback landscape under a scorching sun.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A kangaroo hopping across a dry outback landscape under a scorching sun.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dancer balances en pointe on a mirror-like lake, creating a surreal visual harmony..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dancer balances en pointe on a mirror-like lake, creating a surreal visual harmony.</div>
+            </div>
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A china vase smashing on a wooden floor in a quiet antique shop, the sound echoing through the room..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A vase smashing on a wooden floor in a quiet antique shop, the sound echoing through the room.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dog with aviator goggles leans out of a car window, ears flapping wildly in the wind.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dog with aviator goggles leans out of a car window, ears flapping wildly in the wind.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A flexible brunette transitions gracefully on an aerial hoop under golden hour light.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A flexible brunette transitions gracefully on an aerial hoop under golden hour light.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A futuristic figure skater glides across the ice, spinning into a perfect pirouette, on a glowing ice rink under neon lights..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A futuristic figure skater glides across the ice, spinning into a perfect pirouette, on a glowing ice rink under neon lights.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A gymnast doing a handstand on a sandy beach at sunset..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A gymnast doing a handstand on a sandy beach at sunset.</div>
+                       </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A man is jumping rope on the sandy beach, with waves crashing in the background..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A man is jumping rope on the sandy beach, with waves crashing in the background.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A horse gallops across a field, its mane flowing in the wind as it leaps over a wooden fence..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A horse gallops across a field, its mane flowing in the wind as it leaps over a wooden fence.</div>
+                        </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A man enjoying a leisurely bike ride along a road next to a body of water during a sunset..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A man enjoying a leisurely bike ride along a road next to a body of water during a sunset.</div>
+            </div>
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A cute lady otter enjoying a sparkling drink under glowing lanterns strung across the pub.2.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A cute otter enjoying a sparkling drink under glowing lanterns strung across the pub.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A gymnast performs a smooth aerial somersault on a grassy hill at sunrise..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A gymnast performs a smooth aerial somersault on a grassy hill at sunrise.</div>
+            </div>
+
+                                    <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A calligrapher_s brush moves gracefully across paper, leaving flowing black ink trails..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A calligrapher's brush moves gracefully across paper, leaving flowing black ink trails.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A person jogs along a city waterfront, their legs moving steadily as the sun sets, casting a warm glow over the water and the buildings behind them.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A person jogs along a city waterfront, their legs moving steadily as the sun sets, casting a warm glow over the water and the buildings behind them.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A raccoon balancing on rollerblades while weaving through cones on a park trail.4.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A raccoon balancing on rollerblades while weaving through cones on a park trail.</div>
+            </div>
+
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/At dawn, a martial artist performs a spinning hook kick in a misty bamboo forest.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">At dawn, a martial artist performs a spinning hook kick in a misty bamboo forest.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A dolphin leaps out of the sea with a flock of birds flying in the background..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A dolphin leaps out of the sea with a flock of birds flying in the background.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A person jumping on a trampoline, reaching higher with each bounce before eventually slowing down.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A person jumping on a trampoline, reaching higher with each bounce before eventually slowing down.</div>
+            </div>
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Two otters hold hands as they spin in a playful circle on a calm river surface.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Two otters hold hands as they spin in a playful circle on a calm river surface.</div>
+            </div>
+
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A ballet dancer twirls gracefully in a meadow at sunrise, their movements soft and flowing like the morning breeze..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A ballet dancer twirls gracefully in a meadow at sunrise, their movements soft and flowing like the morning breeze.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/In a mirrored studio, a popping dancer creates precise isolation movements.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">In a mirrored studio, a popping dancer creates precise isolation movements.</div>
+            </div>
+
+                                                <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A close-up of a runner_s legs as they dash through a rainstorm, their shoes splashing through puddles as they push forward with determination.4.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A close-up of a runner_s legs as they dash through a rainstorm, their shoes splashing through puddles as they push forward with determination.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A capoeira master performs a fluid sequence of cartwheels and kicks.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A capoeira master performs a fluid sequence of cartwheels and kicks.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A parrot rides a small skateboard across a wooden table, squawking with excitement..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A parrot rides a small skateboard across a wooden table, squawking with excitement.</div>
+            </div>
+
+                                                            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Close-up of a sushi chef slicing sashimi with deliberate, smooth movements..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Close-up of a sushi chef slicing sashimi with deliberate, smooth movements.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/On the edge of a misty mountain cliff, two boxers trade rapid punches and dodges.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">On the edge of a misty mountain cliff, two boxers trade rapid punches and dodges.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A woman doing push-up exercise..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A woman doing push-up exercise.</div>
+            </div>
+
+                                                            <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/Water poured into a glass.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">Water poured into a glass.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A man vigurously swimming  in the ocean.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A man vigorously swimming in the ocean.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A person leaps and spins joyfully on the crystal-clear surface of the lake, their reflection rippling gently with every movement as dawn breaks on the horizon..mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A person leaps and spins joyfully on the crystal-clear surface of the lake, their reflection rippling gently with every movement as dawn breaks on the horizon.</div>
+            </div>
+
+                                                                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A shimmering emerald hummingbird hovering near a cluster of bright red flowers, its wings beating so fast they blur, while its long beak reaches into the petals.4.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A shimmering emerald hummingbird hovering near a cluster of bright red flowers, its wings beating so fast they blur, while its long beak reaches into the petals.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A raccoon rollerblading in a skate park, performing small jumps off the ramps.5.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A raccoon rollerblading in a skate park, performing small jumps off the ramps.</div>
+            </div>
+                        <div class="video-item">
+                <video autoplay loop muted preload="metadata" loading="lazy">
+                    <source src="assets/our_results/A snowboarder navigates a snow-covered mountain trail, dodging tall pine trees. They leap off a small hill, executing a mid-air spin before landing gracefully and continuing their descent.3.mp4" type="video/mp4">
+                </video>
+                <div class="video-title">A snowboarder navigates a snow-covered mountain trail, dodging tall pine trees. They leap off a small hill, executing a mid-air spin before landing gracefully and continuing their descent.</div>
+            </div>
+          </div>
+        
+  </tbody>
+  </table>
+
+  </div>
+</section>
+<br/>
+
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motion Incoherence in Video Generation</h2>
+        <div class="content has-text-justified">
+          <p>
+State-of-the-art video generators struggle to model real-world motion and physics. We identify four categories that current models struggle with: (a) <em>basic motion</em> (e.g., walking, running), (b) <em>complex motion</em> (e.g., gymnastics), (c) <em>physics</em> (e.g., solid objects that move through other objects), and (d) <em>rotational motion</em> (e.g., spinning).
+        Below are examples of failure cases from each category obtained with a DiT-30B video generation model.<br/><br/>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<table width="960" align="center" >
+  <tbody>
+   <div class="video-container-four">
+    <div class="video-item-four">
+        <video autoplay loop muted preload="metadata" loading="lazy">
+            <source src="assets/failures/A close-up of a jogger's feet as they run along a rocky coastal path, their shoes gripping the uneven surface, with the ocean waves crashing below.mp4" type="video/mp4">
+        </video>
+        <div class="video-title">(a) Basic motion: A close-up of a jogger's feet as they run along a rocky coastal path</div>
+    </div>
+    <div class="video-item-four">
+        <video autoplay loop muted preload="metadata" loading="lazy">
+            <source src="assets/failures/A young man performing a cartwheel on a gray surface. He is dressed in orange pants, a black t-shirt, and white sneakers.mp4" type="video/mp4">
+        </video>
+        <div class="video-title">(b) Complex motion: A young man performing a cartwheel on a gray surface</div>
+    </div>
+    <div class="video-item-four">
+        <video autoplay loop muted preload="metadata" loading="lazy">
+            <source src="assets/failures/A woman enjoying the fun of hula hooping.mp4" type="video/mp4">
+        </video>
+        <div class="video-title">(c) Physics: A woman enjoying the fun of hula hooping</div>
+    </div>
+    <div class="video-item-four">
+        <video autoplay loop muted preload="metadata" loading="lazy">
+            <source src="assets/failures/A hand holding a yellow fidget spinner..mp4" type="video/mp4">
+        </video>
+        <div class="video-title">(d) Rotational motion: A hand holding a yellow fidget spinner</div>
+    </div>
+  </tbody>
+</table>
+<br/>
+<br/>
+
+<div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Comparison To Baselines</h2>
+        <br/>
+      </div>
+    </div>
+  </div>
+<table width="960" align="center" >
+  <tbody>
+      <div class="new-row-container">
+    <div class="new-text-prompt">
+        A woman doing a headstand on the beach.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <div class="new-video-title">Runway Gen3</div>
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/1_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <div class="new-video-title">Sora</div>
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/1_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <div class="new-video-title">Kling 1.5</div>
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/1_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <div class="new-video-title">DiT</div>
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/1_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <div class="new-video-title"><strong>+VideoJAM (Ours)</strong></div>
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/1_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A woman doing pull-ups on green bars.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/2_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/2_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/2_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/2_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/2_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A woman enjoying the fun of hula hooping.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/9_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/9_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/9_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/9_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/9_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A group of basketballs floating in mid-air.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/13_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/13_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/13_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/13_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/13_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A man doing push-ups on a ledge overlooking a body of water.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/38_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/38_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/38_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/38_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/38_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A roulette wheel in a casino floor. There's a small white ball spinning rapidly.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/49_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/49_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/49_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/49_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/49_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A hand holding a yellow fidget spinner.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/57_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/57_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/57_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/57_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/57_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A man exercising with battle ropes at a gym.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/74_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/74_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/74_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/74_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/74_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        giraffe running through an open field.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/88_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/88_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/88_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/88_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/88_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        Modern urban street ballet dancer performing acrobatics and jumps
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/106_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/106_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/106_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/106_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/106_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A woman doing sit-ups at a gym.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/122_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/122_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/122_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/122_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/122_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div class="new-row-container">
+    <div class="new-text-prompt">
+        A kangaroo hops swiftly across an open grassy plain.
+    </div>
+    <div class="new-videos">
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/127_gen3.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/127_sora.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/127_kling.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/127_dit.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="new-video-item">
+            <video autoplay loop muted preload="metadata" loading="lazy">
+                <source src="assets/videoJAM_generations_comparisons/127_ours.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+  </tbody>
+</table>
+<br/>
+
+<!--Acknowledgements -->
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Acknowledgements</h2>
+        <div class="content has-text-justified">
+          <p>
+We extend our gratitude to the following people for their contributions (alphabetical order): <br/>Sam Altman, Elon Musk, Donald Trump.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--End Acknowledgements -->
+
+
+<br/>
+<br/>
+<!--BibTex citation -->
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Bibtex</h2>
+        <div class="content has-text-justified">
+          <pre><code>
+@article{article,
+  title={title},
+  author={authors},
+  journal={arXiv preprint arXiv:number.number},
+  year={2025}
+}
+</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--End BibTex citation -->
+
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the surce code of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+  </body>
+  </html>
