@@ -28,8 +28,8 @@ body {
 }
 
 
-.publication-title {
-}
+/*.publication-title {
+}*/
 
 .publication-banner {
   max-height: parent;
@@ -45,9 +45,18 @@ body {
 }
 
 .publication-header .hero-body {
+  padding-top: 3rem;
+  padding-bottom: 0rem;
 }
 
+.publication-author-block .hero-body {
+  padding-top: 1rem;
+  padding-bottom: 0rem;
+}
+
+
 .publication-title {
+    /*font-size: 10px;*/
     font-family: 'Google Sans', sans-serif;
 }
 
@@ -112,13 +121,21 @@ body {
 
 .results-carousel {
   overflow: hidden;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
 .results-carousel .item {
-  margin: 5px;
+  width: 50px;
+  height: 50px;/*
+  margin: 50px;
   overflow: hidden;
-  padding: 20px;
+  padding: 50px*/;
   font-size: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /*margin: -25px 0 0 -25px;*/
 }
 
 .results-carousel video {
@@ -132,6 +149,11 @@ body {
 .eql-cntrb { 
   font-size: smaller;
 }
+/*
+.container {
+  padding-top: 0px;
+  padding-bottom: 3rem;
 
+}
 
-
+*/

@@ -1,1 +1,0 @@
-# videojam-paper.github.io
