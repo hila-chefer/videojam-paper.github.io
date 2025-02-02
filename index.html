@@ -90,9 +90,9 @@
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="Project webpage for videojam">
+  <meta name="description" content="VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Generation in Video Models">
   <meta property="og:title" content="VideoJAM"/>
-  <meta property="og:description" content="Project webpage for videojam"/>
+  <meta property="og:description" content="VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Generation in Video Model"/>
   <meta property="og:url" content="https://videojam.github.io/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
   <meta property="og:image" content="static/image/your_banner_image.png" />
@@ -278,7 +278,7 @@
     .video-container-four {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 4 columns */
-            gap: calc(0.5%);; /* Space between videos */
+            gap: calc(0.5%); /* Space between videos */
             max-width: 1100px; /* Adjust to your preferred width */
             margin: 0 auto; /* Center align the grid */
         }
@@ -288,7 +288,7 @@
             align-items: center;
         }
         .video-title-four {
-            margin-bottom: 10px; /* Space between title and video */
+            margin-bottom: 0px; /* Space between title and video */
             font-weight: bold;
             text-align: center;
         }
@@ -296,7 +296,7 @@
         .video-container-five {
             display: grid;
             grid-template-columns: repeat(5, 1fr); /* 5 columns */
-            gap: calc(0.5%);; /* Space between videos */
+            gap: calc(0.5%); /* Space between videos */
             max-width: 1400px; /* Adjust to your preferred width */
             margin: 0 auto; /* Center align the grid */
         }
@@ -355,7 +355,7 @@
 
     .video-title-3x3 {
         text-align: center;
-        margin-top: 5px;
+        margin-top: 0px;
         font-family: "Times New Roman", serif;
         font-weight: normal !important;
         /* Reduced font size range for better scaling */
@@ -376,6 +376,8 @@
     @media screen and (max-width: 480px) {
         .video-title-3x3 {
             font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+            margin-top: 0px;
+            margin: 0px;
             /* -webkit-line-clamp: 2;
             line-clamp: 2;
             max-height: 1.2em; */
@@ -461,6 +463,8 @@
 
 <body>
 
+    
+
  <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
@@ -469,19 +473,22 @@
             <br> 
             <h1 class="title is-1 publication-title">VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Generation in Video Models</h1>
             <div class="is-size-5 publication-authors">
-              <!-- Paper authors -->
-              <span class="author-block">
-                Bla1
-              </span>
-              <span class="author-block">
-                Bla2
-              </span>
-              <span class="author-block">
-                Bla3
-              </span>
-              
-              <div class="is-size-5 publication-authors">
-                <span class="author-block">Bla AI</span>
+                <span class="author-block"><a href="https://hila-chefer.github.io/" target="_blank">Hila Chefer</a><sup>1,2</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://scholar.google.com/citations?user=nIEep3cAAAAJ&hl=en" target="_blank">Uriel Singer</a><sup>1</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://scholar.google.co.il/citations?user=OfG5ctMAAAAJ&hl=en" target="_blank">Amit Zohar</a><sup>1</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://scholar.google.com/citations?user=sJKiJQwAAAAJ&hl=en" target="_blank">Yuval Kirstain</a><sup>1</sup><span>&numsp;</span></span>
+                <br>
+                <span class="author-block"><a href="https://scholar.google.com/citations?user=CP62OTMAAAAJ&hl=en" target="_blank">Adam Polyak</a><sup>1</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://ai.meta.com/people/4438198466405202/yaniv-taigman/" target="_blank">Yaniv Taigman</a><sup>1</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="http://www.cs.tau.ac.il/~wolf/" target="_blank">Lior Wolf</a><sup>2</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://scholar.google.com/citations?user=7vLSIswAAAAJ&hl=iw" target="_blank">Shelly Sheynin</a><sup>1</sup></span>
+              </div>
+    
+              <div class="is-size-7 publication-authors">
+                <span class="author-block"><sup>1</sup>Meta AI</span><span>&numsp;</span>
+                <span class="author-block"><sup>2</sup>Tel Aviv University</span><span>&numsp;</span>
+                <br>
+                <span class="author-block"></span>Work was done while the first author was an intern at Meta AI<span>&numsp;</span>
               </div>
 
               <div class="column has-text-centered">
@@ -557,6 +564,7 @@
             <br>
             <strong>Use the arrows to navigate through the results.</strong>
           </p>
+          <br>
         </div>
       </div>
     </div>
@@ -975,6 +983,7 @@
                 <br>
                 <strong>Use the arrows to navigate through the results.</strong>
               </p>
+              <br>
             </div>
           </div>
         </div>
@@ -1231,14 +1240,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A woman doing a headstand on the beach.
         </span>
-    </div>
 </td>
-
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1272,13 +1277,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A woman engaging in a challenging workout routine, performing pull-ups on green bars.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1312,13 +1314,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A woman enjoying the fun of hula hooping.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1352,13 +1351,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A group of basketballs floating in mid-air in slow motion.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1392,13 +1388,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A roulette wheel in a dimly lit room or casino floor. In the center of the wheel, there's a small white ball that appears to be spinning rapidly.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1432,13 +1425,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A woman doing sit-ups at a gym.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1472,13 +1462,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A hand spinning a yellow fidget spinner.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1512,13 +1499,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A man exercising with battle ropes at a gym.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1552,13 +1536,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A giraffe running through an open field. The background is a bright blue sky with fluffy white clouds.
         </span>
-    </div>
 </td>
-<br>
  
 <table width="100%" align="center">
     <tbody>
@@ -1592,13 +1573,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             Modern urban street ballet dancer performing acrobatics and jumps.
         </span>
-    </div>
 </td>
-<br>
 
 <table width="100%" align="center">
     <tbody>
@@ -1632,18 +1610,10 @@
     </tbody>
 </table>
 <td align="center" style="width: 100%; padding: 0;">
-    <div style="max-width: 1200px; width: 100%; margin: 0 auto; text-align: center;">
         <span class="video-title-3x3">
             A kangaroo hops swiftly across an open grassy plain.
         </span>
-    </div>
 </td>
-
-<br/>
-
-
-<br/>
-<br/>
 <!--BibTex citation -->
 
 <section class="section" id="BibTeX">
@@ -1651,11 +1621,12 @@
       <h2 class="title">BibTeX</h2>
       <p>If you find this project useful for your research, please cite the following:</p>
 
-      <pre><code>@article{chefer2023hidden,
-        title={The Hidden Language of Diffusion Models},
-        author={Chefer, Hila and Lang, Oran and Geva, Mor and Polosukhin, Volodymyr and Shocher, Assaf and Irani, Michal and Mosseri, Inbar and Wolf, Lior},
-        journal={arXiv preprint arXiv:2306.00966},
-        year={2023}
+      <pre><code>@article{chefer2025VideoJAM,
+        title={VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Generation in Video Models},
+        author={Chefer, Hila and Singer, Uriel and Zohar, Amit and Kirstain, Yuval and Polyak, Adam and Taigman, Yaniv and Wolf, Lior and Sheynin, Shelly},
+        <!-- journal={arXiv preprint arXiv:2306.00966}, -->
+        journal={TBD},
+        year={2025}
 }</code></pre>
     </div>
   </section>
