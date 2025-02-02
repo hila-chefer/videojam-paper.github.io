@@ -235,7 +235,7 @@
       outline: none;
     }
 
-    .swiper-icon {
+    /* .swiper-icon {
       font-size: 4rem;
       color: black;
     }
@@ -244,7 +244,7 @@
     }
     .video-size-2 {
     height: 250px;
-    }
+    } */
 
     .video-container-four {
             display: grid;
@@ -252,36 +252,36 @@
             gap: calc(0.5%);; /* Space between videos */
             max-width: 1100px; /* Adjust to your preferred width */
             margin: 0 auto; /* Center align the grid */
-        }
-        .video-item-four {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .video-title-four {
-            margin-bottom: 10px; /* Space between title and video */
-            font-weight: bold;
-            text-align: center;
-        }
+    }
+    .video-item-four {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .video-title-four {
+        margin-bottom: 10px; /* Space between title and video */
+        font-weight: bold;
+        text-align: center;
+    }
 
-        .video-container-five {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 5 columns */
-            gap: calc(0.5%);; /* Space between videos */
-            max-width: 1400px; /* Adjust to your preferred width */
-            margin: 0 auto; /* Center align the grid */
-        }
+    .video-container-five {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 columns */
+        gap: calc(0.5%); /* Space between videos */
+        max-width: 1400px; /* Adjust to your preferred width */
+        margin: 0 auto; /* Center align the grid */
+    }
 
-        /* carouseal with 3 items and 3 rows */
+    /* carouseal with 3 items and 3 rows */
 
         .results-carousel-3x3 {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 0px;
         padding: 0;
         margin: 0 auto;
         justify-content: center;
-        width: 80vw; /* 80% of viewport width */
+        width: 100vw; /* 80% of viewport width */
         max-width: 1400px;
         background-color: var(--main-bg-color);
         box-sizing: border-box;
@@ -344,86 +344,16 @@
         line-height: 1.2; */
     }
 
-    @media screen and (max-width: 480px) {
+    /* Responsive design: Stack the videos vertically on smaller screens */
+    @media (max-width: 768px) {
+        /* Title above the video */
         .video-title-3x3 {
             font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
             /* -webkit-line-clamp: 2;
             line-clamp: 2;
             max-height: 1.2em; */
         }
-
-        .results-carousel-3x3 {
-            width: 96vw;
-            gap: 0px;
-        }
-        
-        .carousel-item-3x3,
-        .carousel-row-3x3 {
-            gap: 0px;
-        }
-        
-        .video-item-3x3 {
-            width: calc(33%); /* Adjust for smaller gap */
-        }
     }
-
-            /* qulitative comparison css */
-
-            /* Container that holds the row of videos */
-            .new-row-container {
-            display: flex;
-            justify-content: space-between; /* Evenly space out the videos */
-            gap: 0px; /* Space between the videos */
-            flex-wrap: nowrap; /* Prevent wrapping of items */
-            padding: 0px 0;
-            width: 100%;
-            max-width: 100%; /* Ensure the container takes up the full width */
-            margin: 0 auto; /* Center the container */
-            overflow: hidden; /* Ensure any excess content is clipped */
-            }
-
-
-
-            /* Title above the video */
-            .new-text-prompt {
-            font-size: 20px; /* Size of the title text */
-            font-weight: bold;
-            color: #333; /* Dark color for the text */
-            }
-
-            /* Make the video fill the width of its container */
-            .new-video-item video {
-            width: 100%; /* Make the video take the full width of the item */
-            display: block;
-            border: none; /* No border around the video */
-            outline: none; /* Remove focus outline */
-            height: auto; /* Maintain video aspect ratio */
-            }
-
-            /* Optional: style for the prompt below the video */
-            /* .new-video-item .new-text-prompt:last-child {
-            font-size: 20px;
-            font-weight: normal;
-            color: #666; /* Lighter color for the prompt } */
-
-            /* Responsive design: Stack the videos vertically on smaller screens */
-            @media (max-width: 768px) {
-            .new-video-item {
-                flex: 1 1 100%; /* Stack videos on smaller screens */
-                width: 100%; /* Full width on smaller devices */
-            }
-
-            .new-video-item:hover {
-                transform: none; /* Remove scale effect on hover */
-            }
-
-                    /* Title above the video */
-        .new-text-prompt {
-            font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
-            font-weight: bold;
-            color: #333; /* Dark color for the text */
-            }
-            }
 
   </style>
 </head>
