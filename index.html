@@ -275,6 +275,22 @@
     height: 250px;
     }
 
+    .responsive-img {
+    width: 80vw;  /* Always 80% of viewport width */
+    max-width: 1400px;  /* Prevents it from exceeding original size */
+    height: auto;  /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto;  /* Center horizontally */
+}
+
+.full-width-container {
+    width: 100vw;  /* Ensure it covers the full viewport width */
+    margin-left: calc(-50vw + 50%);  /* Shift left to align with viewport */
+    text-align: center;
+}
+
+
+
     .video-container-four {
             display: grid;
             grid-template-columns: repeat(4, 1fr); /* 4 columns */
@@ -473,7 +489,7 @@
             <br> 
             <h1 class="title is-1 publication-title">VideoJAM: Joint Appearance-Motion Representations for Enhanced Motion Generation in Video Models</h1>
             <div class="is-size-5 publication-authors">
-                <span class="author-block"><a href="https://hila-chefer.github.io/" target="_blank">Hila Chefer</a><sup>1,2</sup><span>&numsp;</span></span>
+                <span class="author-block"><a href="https://hila-chefer.github.io/" target="_blank">Hila Chefer</a><sup>* 1,2</sup><span>&numsp;</span></span>
                 <span class="author-block"><a href="https://scholar.google.com/citations?user=nIEep3cAAAAJ&hl=en" target="_blank">Uriel Singer</a><sup>1</sup><span>&numsp;</span></span>
                 <span class="author-block"><a href="https://scholar.google.co.il/citations?user=OfG5ctMAAAAJ&hl=en" target="_blank">Amit Zohar</a><sup>1</sup><span>&numsp;</span></span>
                 <span class="author-block"><a href="https://scholar.google.com/citations?user=sJKiJQwAAAAJ&hl=en" target="_blank">Yuval Kirstain</a><sup>1</sup><span>&numsp;</span></span>
@@ -485,10 +501,10 @@
               </div>
     
               <div class="is-size-7 publication-authors">
-                <span class="author-block"><sup>1</sup>Meta AI</span><span>&numsp;</span>
+                <span class="author-block"><sup>1</sup>GenAI, Meta</span><span>&numsp;</span>
                 <span class="author-block"><sup>2</sup>Tel Aviv University</span><span>&numsp;</span>
                 <br>
-                <span class="author-block"></span>Work was done while the first author was an intern at Meta AI<span>&numsp;</span>
+                <span class="author-block"><sup>*</sup></span>Work was done while the first author was an intern at Meta AI<span>&numsp;</span>
               </div>
 
               <div class="column has-text-centered">
@@ -700,9 +716,9 @@
             <div class="carousel-row-3x3">
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
-                        <source data-src="assets/our_results_labeled/A_china_vase_smashing_on_a_wooden_floor_in_a_quiet_antique_shop,_the_sound_echoing_through_the_room..mp4" type="video/mp4">
+                        <source data-src="assets/our_results_labeled/A_man_takes_a_big_bite_from_an_apple.mp4" type="video/mp4">
                     </video>
-                    <div class="video-title-3x3">A vase smashing on a wooden floor in a quiet antique shop.</div>
+                    <div class="video-title-3x3">A man takes a big bite from an apple.</div>
                 </div>
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
@@ -727,9 +743,9 @@
             <div class="carousel-row-3x3">
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
-                        <source data-src="assets/our_results_labeled/A_professional_chef_chops_vegetables_with_speed_and_precision_on_a_wooden_cutting_board..mp4" type="video/mp4">
+                        <source data-src="assets/our_results_labeled/An_acrobat_holding_a_handstand_on_a_mat..mp4" type="video/mp4">
                     </video>
-                    <div class="video-title-3x3">A professional chef chops vegetables on a wooden cutting board.</div>
+                    <div class="video-title-3x3">An acrobat holding a handstand on a mat.</div>
                 </div>
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
@@ -749,9 +765,9 @@
             <div class="carousel-row-3x3">
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
-                        <source data-src="assets/our_results_labeled/An_acrobat_holding_a_handstand_on_a_mat..mp4" type="video/mp4">
+                        <source data-src="assets/our_results_labeled/An_arc_shot_captures_a_figure_skater_gliding_gracefully_across_the_ice_in_slow_motion..mp4" type="video/mp4">
                     </video>
-                    <div class="video-title-3x3">An acrobat holding a handstand on a mat.</div>
+                    <div class="video-title-3x3">An arc shot captures a figure skater gliding gracefully across the ice in slow motion.</div>
                 </div>
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
@@ -847,9 +863,9 @@
             <div class="carousel-row-3x3">
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
-                        <source data-src="assets/our_results_labeled/A_man_takes_a_big_bite_from_an_apple.mp4" type="video/mp4">
+                        <source data-src="assets/our_results_labeled/A_china_vase_smashing_on_a_wooden_floor_in_a_quiet_antique_shop,_the_sound_echoing_through_the_room..mp4" type="video/mp4">
                     </video>
-                    <div class="video-title-3x3">A man takes a big bite from an apple.</div>
+                    <div class="video-title-3x3">A vase smashing on a wooden floor in a quiet antique shop.</div>
                 </div>
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
@@ -859,9 +875,9 @@
                 </div>
                 <div class="video-item video-item-3x3">
                     <video autoplay loop muted playsinline class="lazy">
-                        <source data-src="assets/our_results_labeled/An_arc_shot_captures_a_figure_skater_gliding_gracefully_across_the_ice_in_slow_motion..mp4" type="video/mp4">
+                        <source data-src="assets/our_results_labeled/A_professional_chef_chops_vegetables_with_speed_and_precision_on_a_wooden_cutting_board..mp4" type="video/mp4">
                     </video>
-                    <div class="video-title-3x3">An arc shot captures a figure skater gliding gracefully across the ice in slow motion.</div>
+                    <div class="video-title-3x3">A professional chef chops vegetables on a wooden cutting board.</div>
                 </div>
             </div>
         </div>
@@ -977,9 +993,7 @@
             <h2 class="title is-3">Qualitative Comparison: VideoJAM vs. the Base Model (DiT-30B)</h2>
             <div class="content has-text-justified">
               <p>
-                As mentioned in the paper, <strong>VideoJAM is fine-tuned from a base model, DiT-30B</strong>. In this section, we provide an 
-                <strong>apples-to-apples</strong> qualitative comparison showing the impact of VideoJAM on the base model it was fine-tuned from (DiT-30B). The comparisons are conducted 
-                with the same random seed on diverse prompts that capture a variety of motion types.
+                We provide an apples-to-apples qualitative comparison between <strong>VideoJAM and the base model it was fine-tuned from, DiT-30B.</strong>
                 <br>
                 <strong>Use the arrows to navigate through the results.</strong>
               </p>
@@ -1188,8 +1202,41 @@
     </table>
 </section>
 
+<section class="section hero">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">How does it work?</h2>
+          <div class="content has-text-justified"></div>
+        </div>
+      </div>
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+                 We present <strong>VideoJAM</strong>, a framework that explicitly instills a strong motion
+                prior to any video generation model.  </p>
+                VideoJAM is constructed of two units; (a) <strong>Training.</strong>  Given an input video <em>x<sub>1</sub></em> and its motion
+representation <em>d<sub>1</sub></em>, both signals are noised and embedded to a single, joint latent representation using a linear layer, <em>W<sub>in</sub><sup>+</sup></em>. The diffusion
+model processes the input, and two linear projection layers predict both appearance and motion from the joint representation (<em>W<sub>out</sub><sup>+</sup></em>).
+<br/>
+(b) <strong>Inference.</strong>
+We propose <strong>Inner-Guidance,</strong> where the model’s own noisy motion prediction is used to guide the video prediction at each step.
+          </div>
+        </div>
+      </div>
+      <!-- Responsive Image (Moved Outside the Column) -->
+      <div class="full-width-container">
+        <img src="assets/method_figure.jpg" class="responsive-img"/>
+      </div>
+    </div>
+</section>
+
+
+
 <!-- End section-->
-<section class="section hero is-small">
+<section class="section hero is-light">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
           <div class="column is-four-fifths">
@@ -1640,10 +1687,8 @@
       <div class="column is-8">
         <div class="content">
 
-          <p>
+          <p style="font-size: small; text-align: left;">
             This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the surce code of this website, we just ask that you link back to that page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
           </p>
 
         </div>
