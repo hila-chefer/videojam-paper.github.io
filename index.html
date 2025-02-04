@@ -449,6 +449,23 @@
     font-size: 20px;
 }
 
+.text-container {
+    width: 70vw !important; /* 70% of viewport width */
+    margin: 0 auto !important; /* Center the container */
+    max-width: 1200px !important; /* Optional: maximum width on very large screens */
+    box-sizing: border-box !important; /* Makes sure padding is included in width calculation */
+    text-align: left !important;
+}
+
+/* Optional: adjust width and padding for smaller screens */
+@media screen and (max-width: 768px) {
+    .text-container {
+        width: 85vw !important; /* Slightly wider on mobile for better readability */
+        padding: 15px !important;
+        text-align: left !important;
+    }
+}
+
 /* Adjust video size for different screen sizes */
 @media screen and (max-width: 768px) {
     .teaser-container {
@@ -1281,15 +1298,14 @@
     </table>
 </section>
 
-<section class="section hero">
+<section class="section hero is-small">
     <div class="container is-max-desktop">
-      <!-- Abstract. -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">How does it work?</h2>
-          <div class="content has-text-justified">
-
-            We present <strong>VideoJAM</strong>, a framework that explicitly instills a strong motion
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-four-fifths">
+            <h2 class="title is-3">How does it work?</h2>
+            <div class="content has-text-justified">
+              <p>
+                We present <strong>VideoJAM</strong>, a framework that explicitly instills a strong motion
                 prior to any video generation model.  </p>
                 VideoJAM is constructed of two units; (a) <strong>Training.</strong>  Given an input video <em>x<sub>1</sub></em> and its motion
 representation <em>d<sub>1</sub></em>, both signals are noised and embedded to a single, joint latent representation using a linear layer, <em>W<sub>in</sub><sup>+</sup></em>. The diffusion
@@ -1297,16 +1313,16 @@ model processes the input, and two linear projection layers predict both appeara
 <br/>
 (b) <strong>Inference.</strong>
 We propose <strong>Inner-Guidance,</strong> where the model’s own noisy motion prediction is used to guide the video prediction at each step.
+            </p>
+              <br/>
+            </div>
           </div>
         </div>
+        <div class="full-width-container">
+            <img src="assets/method_figure.jpg" class="responsive-img"/>
+          </div>
       </div>
-      <!-- Responsive Image (Moved Outside the Column) -->
-      <div class="full-width-container">
-        <img src="assets/method_figure.jpg" class="responsive-img"/>
-      </div>
-    </div>
-</section>
-
+    </section>
 
 
 <!-- End section-->
