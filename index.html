@@ -424,6 +424,31 @@
     opacity: 1;
 }
 
+.audio-toggle {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.audio-toggle:hover {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.audio-toggle span {
+    color: white;
+    font-size: 20px;
+}
+
 /* Adjust video size for different screen sizes */
 @media screen and (max-width: 768px) {
     .teaser-container {
@@ -476,8 +501,14 @@
             /* Title above the video */
             .new-text-prompt {
             font-size: 20px; /* Size of the title text */
-            font-weight: bold;
             color: #333; /* Dark color for the text */
+            }
+
+            /* Title above the video */
+            .new-text-prompt-bold {
+            font-size: 20px; /* Size of the title text */
+            font-weight: bold;
+            color: #02376c; /* Dark color for the text */
             }
 
             /* Make the video fill the width of its container */
@@ -509,8 +540,13 @@
                     /* Title above the video */
         .new-text-prompt {
             font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
-            font-weight: bold;
             color: #333; /* Dark color for the text */
+            }
+
+            .new-text-prompt-bold {
+            font-size: clamp(8px, 1.2vw, 14px); /* Smaller minimum size, reduced scaling rate */
+            font-weight: bold;
+            color: #02376c; /* Dark color for the text */
             }
             }
 
@@ -581,6 +617,10 @@
         <video autoplay loop muted playsinline class="lazy">
             <source data-src="teaser.mp4" type="video/mp4">
         </video>
+        <button class="audio-toggle">
+            <span class="audio-off">🔇</span>
+            <span class="audio-on" style="display: none">🔊</span>
+        </button>
     </div>
 </section>
 
@@ -1247,14 +1287,9 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <h2 class="title is-3">How does it work?</h2>
-          <div class="content has-text-justified"></div>
-        </div>
-      </div>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
           <div class="content has-text-justified">
-            <p>
-                 We present <strong>VideoJAM</strong>, a framework that explicitly instills a strong motion
+
+            We present <strong>VideoJAM</strong>, a framework that explicitly instills a strong motion
                 prior to any video generation model.  </p>
                 VideoJAM is constructed of two units; (a) <strong>Training.</strong>  Given an input video <em>x<sub>1</sub></em> and its motion
 representation <em>d<sub>1</sub></em>, both signals are noised and embedded to a single, joint latent representation using a linear layer, <em>W<sub>in</sub><sup>+</sup></em>. The diffusion
@@ -1317,7 +1352,7 @@ We propose <strong>Inner-Guidance,</strong> where the model’s own noisy motion
                 </video>
             </div>
             <div class="video-item-four">
-                <div class="new-text-prompt"><strong>DiT+VideoJAM</strong></div>
+                <div class="new-text-prompt-bold">DiT+VideoJAM</div>
                 <video autoplay loop muted playsinline class="lazy">
                     <source data-src="assets/videoJAM_generations_comparisons/1_ours.mp4" type="video/mp4">
                 </video>
